@@ -1,6 +1,6 @@
 /** Team Legendary Spoon - Calvin Vuong, Ruochong Wu, Zicheng Zhen
     APCS2 pd10
-    HW35 -- Name / Desc 
+    HW35 -- Privileged Status Gets You to the Front of the Line 
     2016-05-04 **/
 
 import java.util.ArrayList;
@@ -15,23 +15,16 @@ public class ArrayPriorityQueue implements PriorityQueue {
     }
 
     /** Methods **/
+    // adds comparable c to the _queue, such that the highest priority element is at the end of the _queue array (which gets dequeued first)
     public void add(Comparable c) {
 	_queue.add(c);
-	if (isEmpty()){return;}
-	else{
-	    for (int i=_queue.size()-1; i>0; i--){
-		if (i == 0){
-		    return;
-		}
-		else if (c.compareTo(_queue.get(i-1))<1){
-		    return;
-		}
-		else {
-		    swap(i, i-1);
-		}
-	    }
+	// move c to the right position, such that element to the left is the latest element with lower priority
+	for (int i = _queue.size()-1; i > 0; i--){
+	    if (c.compareTo(_queue.get(i-1)) < 0)
+		return;
+	    else 
+		swap(i, i-1);
 	}
-		
     }
 
     public Comparable removeMin() {
@@ -54,15 +47,12 @@ public class ArrayPriorityQueue implements PriorityQueue {
     }
 
     public String toString(){
-	String ret = "[";
-	for (Object x : _queue){
-	    ret += x.toString()+", ";
-	}
-	return ret+"]";
+	return _queue.toString();
     }
 
     public static void main(String[] args){
 	ArrayPriorityQueue test = new ArrayPriorityQueue();
+
 	test.add(1);
 	test.add(1);
 	test.add(2);
@@ -70,6 +60,15 @@ public class ArrayPriorityQueue implements PriorityQueue {
 	test.add(4);
 	test.add(3);
 	test.add(2);
+	System.out.println(test);
+
+	System.out.println( test.peekMin() );
+	System.out.println( test.removeMin() );
+	System.out.println(test);
+
+	System.out.println( test.removeMin() );
+	System.out.println( test.peekMin() );
+	System.out.println( test.removeMin() );
 	System.out.println(test);
     }
 }
