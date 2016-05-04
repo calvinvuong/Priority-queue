@@ -16,7 +16,22 @@ public class ArrayPriorityQueue implements PriorityQueue {
 
     /** Methods **/
     public void add(Comparable c) {
-	return;
+	_queue.add(c);
+	if (isEmpty()){return;}
+	else{
+	    for (int i=_queue.size()-1; i>0; i--){
+		if (i == 0){
+		    return;
+		}
+		else if (c.compareTo(_queue.get(i-1))<1){
+		    return;
+		}
+		else {
+		    swap(i, i-1);
+		}
+	    }
+	}
+		
     }
 
     public Comparable removeMin() {
@@ -36,5 +51,25 @@ public class ArrayPriorityQueue implements PriorityQueue {
 	Comparable tmp = _queue.get(j);
 	_queue.set(j, _queue.get(k));
 	_queue.set(k, tmp);
+    }
+
+    public String toString(){
+	String ret = "[";
+	for (Object x : _queue){
+	    ret += x.toString()+", ";
+	}
+	return ret+"]";
+    }
+
+    public static void main(String[] args){
+	ArrayPriorityQueue test = new ArrayPriorityQueue();
+	test.add(1);
+	test.add(1);
+	test.add(2);
+	test.add(3);
+	test.add(4);
+	test.add(3);
+	test.add(2);
+	System.out.println(test);
     }
 }
