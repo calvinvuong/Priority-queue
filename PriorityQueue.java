@@ -6,7 +6,7 @@ HW35 -- Name / Desc
 */
 
 public interface PriorityQueue{
-    void add(Object x);
+    void add(Comparable x);
     boolean isEmpty();
     Object peekMin();
     Object removeMin();
